@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faker productos</title>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container mt-3">
+    <h2>Productos al azar</h2>
+    <hr/>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Foto</th>
+        </tr>
+      </thead>
+      <tbody id="bodyTable">
+        
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    
+    const renderTable = async ()=>{
+      try {
+        const productos = await getProductos();
+        productos.map(prd=>{
+          bodyTable.innerHTML += `
+          <tr>
+            <th scope="row">${prd.id}</th>
+            <td>${prd.nombre}</td>
+            <td>${prd.precio}</td>
+            <td>
+              <img src="${prd.foto}" alt="${prd.nombre}" width="50"/>  
+            </td>
+          </tr>
+          `;
+        })
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    
+    const getProductos = async()=>{
+      try {
+        const res = await fetch('/api/productos-test');
+        const {data} = await res.json();
+        return data;
+      } catch (error) {
+        throw new Error(error);
+      }
+    }
+    const bodyTable = document.getElementById("bodyTable");
+    renderTable();
+  </script>
+</body>
+</html>
