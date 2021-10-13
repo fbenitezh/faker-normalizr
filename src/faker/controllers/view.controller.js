@@ -6,7 +6,8 @@ class ViewController{
   async root(req,res){
     const productos = await productoService.listarUsuariosRandom();
     res.render('productos',{
-      productos
+      productos,
+      nombre:req.session.nombre
     });
   }
 
@@ -18,9 +19,15 @@ class ViewController{
   }
 
   async renderLogout(req,res){
-    res.render('logout',{
-      nombre:'Franco'
-    });
+    let nombre = req.session.nombre;
+    req.session.destroy(err=>{
+      if(err){
+        nombre = "";
+      }
+      res.render('logout',{
+        nombre
+      });
+    })
   }
 }
 

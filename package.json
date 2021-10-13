@@ -6,13 +6,14 @@
   "type": "module",
   "scripts": {
     "normalizr": "node ./src/normalizacion/index.js",
-    "faker": "node ./src/faker/index.js",
-    "dev:faker": "nodemon ./src/faker/index.js"
+    "faker": "node NODE_ENV=production ./src/faker/index.js",
+    "dev:faker": "NODE_ENV=development nodemon ./src/faker/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "connect-mongodb-session": "^3.1.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.4",

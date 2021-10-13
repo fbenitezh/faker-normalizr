@@ -1,5 +1,6 @@
 import { Router } from "express";
 import ViewController from "../controllers/view.controller.js";
+import {verifySession} from '../middlewares/verifySession.js';
 
 class ViewRoute  extends Router {
   constructor(props) {
@@ -7,8 +8,8 @@ class ViewRoute  extends Router {
     this.viewController = new ViewController();
 
     this.get("/login", this.viewController.renderLogin);
-    this.get("/logout", this.viewController.renderLogout);
-    this.get("/", this.viewController.root);
+    this.get("/logout", verifySession,this.viewController.renderLogout);
+    this.get("/", verifySession, this.viewController.root);
   }
 }
 
