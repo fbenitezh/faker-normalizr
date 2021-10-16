@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "normalizr": "node ./src/normalizacion/index.js",
-    "faker": "node NODE_ENV=production ./src/faker/index.js",
-    "dev:faker": "NODE_ENV=development nodemon ./src/faker/index.js"
+    "faker": "NODE_ENV=production  node ./src/faker/index.js"
   },
   "keywords": [],
   "author": "",
