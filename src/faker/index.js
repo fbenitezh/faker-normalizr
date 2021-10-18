@@ -44,8 +44,8 @@ app.use(
     saveUninitialized: true,
     secret: SECRET_SESSION,
     cookie: {
-      maxAge: 10 * 1000,
-      sameSite: NODE_ENV == "production" ? "strict" : "lax",
+      maxAge: 60 * 1000,
+      sameSite: "lax",
     },
     rolling: true,
   })
