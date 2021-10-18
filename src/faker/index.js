@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import AuthRoute from "./routes/auth.route.js";
 import ProductosRoute from "./routes/productos.route.js";
 import ViewRoute from "./routes/view.route.js";
+import {cacheControl} from './middlewares/cacheControl.js';
 const productosRoute = new ProductosRoute();
 const authRoute = new AuthRoute();
 const viewRoute = new ViewRoute();
@@ -22,6 +23,7 @@ const store = new MongoStore({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cacheControl);
 app.engine(
   ".hbs",
   handlebars({
@@ -42,7 +44,7 @@ app.use(
     saveUninitialized: true,
     secret: SECRET_SESSION,
     cookie: {
-      maxAge: 60 * 1000,
+      maxAge: 10 * 1000,
       sameSite: NODE_ENV == "production" ? "strict" : "lax",
     },
     rolling: true,

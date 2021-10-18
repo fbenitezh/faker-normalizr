@@ -3,7 +3,7 @@ const productoService = new ProductoService();
 
 class ViewController{
 
-  async root(req,res){
+  async index(req,res){
     const productos = await productoService.listarUsuariosRandom();
     res.render('productos',{
       productos,

@@ -1,6 +1,3 @@
-import ProductoService from "../services/productos.service.js";
-const productoService = new ProductoService()
-
 class AuthController {
 
   async renderLogin(req,res){
@@ -11,11 +8,7 @@ class AuthController {
     try {
       const {body:{nombre}} = req;
       req.session.nombre = nombre;
-      const productos = await productoService.listarUsuariosRandom();
-      res.render("productos",{
-        nombre:req.session.nombre,
-        productos
-      });
+      res.redirect('/');
     } catch (error) {
       res.status(400).json({
         ok: false,

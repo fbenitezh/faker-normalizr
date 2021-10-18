@@ -9,7 +9,7 @@ class ViewRoute  extends Router {
 
     this.get("/login", this.viewController.renderLogin);
     this.get("/logout", verifySession,this.viewController.renderLogout);
-    this.get("/", verifySession, this.viewController.root);
+    this.get("/", verifySession, this.viewController.index);
   }
 }
 
